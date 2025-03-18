@@ -14,8 +14,6 @@ sidebar.style.flexDirection = 'column';
 sidebar.style.justifyContent = 'center'; 
 document.body.appendChild(sidebar);
 
-document.body.style.marginLeft = '50px';
-
 const link = document.createElement('a');
 link.href = 'https://www.linkedin.com/feed/';
 link.style.width = '20px';
@@ -28,3 +26,22 @@ link.style.display = 'block';
 link.style.margin = 'auto';
 
 sidebar.appendChild(link);
+
+// Separare la sidebar dal resto della pagina
+const style = document.createElement('style');
+style.innerHTML = `
+  body {
+    display: flex;
+    margin-left: 50px; /* Diamo spazio al contenuto, separandolo dalla sidebar */
+  }
+
+  body > *:not(div) {
+    margin-left: 50px; /* Spostiamo il contenuto per evitare sovrapposizioni */
+  }
+
+  #sidebar {
+    z-index: 9999; /* Manteniamo la sidebar sopra al contenuto, ma solo in caso */
+  }
+`;
+
+document.head.appendChild(style);
