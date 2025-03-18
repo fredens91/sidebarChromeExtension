@@ -24,24 +24,4 @@ link.style.textDecoration = 'none';
 link.style.fontSize = '10px';
 link.style.display = 'block';
 link.style.margin = 'auto';
-
-sidebar.appendChild(link);
-
-// Separare la sidebar dal resto della pagina
-const style = document.createElement('style');
-style.innerHTML = `
-  body {
-    display: flex;
-    margin-left: 50px; /* Diamo spazio al contenuto, separandolo dalla sidebar */
-  }
-
-  body > *:not(div) {
-    margin-left: 50px; /* Spostiamo il contenuto per evitare sovrapposizioni */
-  }
-
-  #sidebar {
-    z-index: 9999; /* Manteniamo la sidebar sopra al contenuto, ma solo in caso */
-  }
-`;
-
-document.head.appendChild(style);
+document.body.appendChild(link);
