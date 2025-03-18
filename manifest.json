@@ -1,21 +1,21 @@
 {
-    "manifest_version": 3,
-    "name": "Sidebar Sempre Visibile",
-    "version": "1.0",
-    "description": "Una sidebar visibile sempre con collegamenti e preferiti.",
-    "permissions": ["storage"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ],
-    "host_permissions": [
-      "http://*/*",
-      "https://*/*"
-    ]
-  }
-  
+  "manifest_version": 3,
+  "name": "Sidebar Sempre Visibile",
+  "version": "1.0",
+  "description": "Una sidebar visibile sempre con collegamenti e preferiti.",
+  "permissions": ["storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["https://mail.google.com/*","https://calendar.google.com/*","https://www.youtube.com/*"], 
+      "js": ["content.js"]
+    }
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
