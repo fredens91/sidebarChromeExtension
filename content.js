@@ -21,76 +21,28 @@ title.style.fontSize = '14px'; // Ridurre la dimensione del titolo per risparmia
 title.style.marginBottom = '10px';
 sidebar.appendChild(title);
 
-// Aggiungi un campo di input per aggiungere nuovi collegamenti
-const input = document.createElement('input');
-input.type = 'text';
-input.placeholder = 'Aggiungi un preferito';
-input.style.width = '100%';
-input.style.padding = '5px';
-input.style.marginBottom = '10px';
-input.style.border = 'none';
-input.style.borderRadius = '5px';
-input.style.fontSize = '12px'; // Font più piccolo per risparmiare spazio
-sidebar.appendChild(input);
-
-// Aggiungi un pulsante per aggiungere il collegamento
-const button = document.createElement('button');
-button.innerText = 'Aggiungi';
-button.style.width = '100%';
-button.style.padding = '5px';
-button.style.backgroundColor = '#3498db';
-button.style.color = 'white';
-button.style.border = 'none';
-button.style.borderRadius = '5px';
-button.style.cursor = 'pointer';
-button.style.fontSize = '12px'; // Font più piccolo per risparmiare spazio
-sidebar.appendChild(button);
-
-// Aggiungi la lista dei preferiti
-const favoritesList = document.createElement('ul');
-favoritesList.style.listStyleType = 'none';
-favoritesList.style.paddingLeft = '0';
-favoritesList.style.marginTop = '10px';
-favoritesList.style.fontSize = '12px'; // Font più piccolo per risparmiare spazio
-sidebar.appendChild(favoritesList);
-
 // Aggiungi la sidebar al body della pagina
 document.body.appendChild(sidebar);
 
 // Sposta il contenuto della pagina per fare spazio alla sidebar
-document.body.style.marginLeft = '50px'; // La pagina si sposterà a destra di 80px per fare spazio alla sidebar
+document.body.style.marginLeft = '50px'; // La pagina si sposterà a destra di 50px per fare spazio alla sidebar
 
-// Carica i preferiti salvati dal localStorage
-chrome.storage.local.get('favorites', (data) => {
-  if (data.favorites) {
-    data.favorites.forEach(link => {
-      addFavoriteToList(link);
-    });
-  }
-});
+// Crea dei quadrati rosa nel corpo principale
+const squaresContainer = document.createElement('div');
+squaresContainer.style.marginTop = '10px';
+document.body.appendChild(squaresContainer);
 
-// Funzione per aggiungere un preferito alla lista
-button.addEventListener('click', () => {
-  const newLink = input.value.trim();
-  if (newLink) {
-    chrome.storage.local.get('favorites', (data) => {
-      const favorites = data.favorites || [];
-      favorites.push(newLink);
-      chrome.storage.local.set({ favorites }, () => {
-        addFavoriteToList(newLink);
-        input.value = '';
-      });
-    });
-  }
-});
+// Modifica la larghezza dei quadrati per essere un po' meno della larghezza della colonna principale
+const columnWidth = document.body.offsetWidth - 50; // 50px per la sidebar
+const squareWidth = columnWidth * 0.8; // Quadrati più stretti della colonna principale
 
-// Funzione per aggiungere un preferito alla lista visibile
-function addFavoriteToList(link) {
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.href = link;
-  a.textContent = link;
-  a.target = '_blank';
-  li.appendChild(a);
-  favoritesList.appendChild(li);
+// Aggiungi dei quadrati rosa
+for (let i = 0; i < 5; i++) { // Aggiungiamo 5 quadrati rosa
+  const square = document.createElement('div');
+  square.style.width = `${squareWidth}px`;
+  square.style.height = '100px'; // Altezza del quadrato
+  square.style.backgroundColor = '#e74c3c'; // Colore rosa
+  square.style.marginBottom = '10px';
+  square.style.borderRadius = '5px'; // Bordo arrotondato
+  squaresContainer.appendChild(square);
 }
